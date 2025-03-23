@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- 保持原有head部分不变，在style部分添加以下新样式 -->
+    <style>
+        /* 新增结果页样式 */
+        #result {
+            display: none;
+        }
+        
+        .info {
+            margin-bottom: 25px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+        }
+        
+        .info p {
+            margin: 8px 0;
+            color: #444;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #f8f9fa;
+            color: #1a73e8;
+        }
+
+        .total-score {
+            text-align: right;
+            font-size: 20px;
+            font-weight: bold;
+            color: #1a73e8;
+            padding: 15px;
+            border-top: 2px solid #1a73e8;
+        }
+
+        .back-btn {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-btn button {
+            width: 200px;
+            background: #666;
+        }
+
+        .back-btn button:hover {
+            background: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>中考成绩查询系统</h1>
+        <form id="queryForm">
+            <!-- 保持原有表单内容不变 -->
+        </form>
+    </div>
+
+    <!-- 新增成绩结果显示 -->
+    <div id="result" class="container">
+        <h1>中考成绩查询结果</h1>
+        <div class="info">
+            <p>准考证号：<span id="resultExamNumber">20231478523694</span></p>
+            <p>考试时间：2023年上海市中考</p>
+        </div>
+
+        <table>
+            <tr>
+                <th>科目</th>
+                <th>分数</th>
+                <th>满分</th>
+            </tr>
+            <tr>
+                <td>语文</td>
+                <td>148</td>
+                <td>150</td>
+            </tr>
+            <tr>
+                <td>数学</td>
+                <td>147</td>
+                <td>150</td>
+            </tr>
+            <tr>
+                <td>英语</td>
+                <td>149</td>
+                <td>150</td>
+            </tr>
+            <tr>
+                <td>综合测试</td>
+                <td>150</td>
+                <td>150</td>
+            </tr>
+            <tr>
+                <td>道德与法治</td>
+                <td>59</td>
+                <td>60</td>
+            </tr>
+            <tr>
+                <td>历史</td>
+                <td>59</td>
+                <td>60</td>
+            </tr>
+            <tr>
+                <td>体育</td>
+                <td>30</td>
+                <td>30</td>
+            </tr>
+        </table>
+        
+        <div class="total-score">
+            总分：724/750
+        </div>
+
+        <div class="back-btn">
+            <button onclick="location.reload()">返回查询</button>
+        </div>
+    </div>
+
+    <script>
+        // 表单提交处理
+        document.getElementById('queryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 生成随机14位准考证号
+            const generateExamNumber = () => {
+                const prefix = '2023'; // 年份前缀
+                const randomPart = Math.floor(Math.random() * 10000000000).toString().padStart(10, '0');
+                return prefix + randomPart;
+            };
+
+            // 显示结果页面
+            document.querySelector('.container').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('resultExamNumber').textContent = generateExamNumber();
+        });
+
+        // 身份证验证增强（示例）
+        document.getElementById('idCard').addEventListener('input', function(e) {
+            this.value = this.value.toUpperCase().replace(/[^0-9X]/g, '');
+        });
+    </script>
+</body>
+</html>
