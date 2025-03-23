@@ -1,23 +1,88 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <!-- 保持原有head部分不变，在style部分添加以下新样式 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上海中考成绩查询系统</title>
     <style>
-        /* 新增结果页样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: '微软雅黑', sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #1a73e8;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #1a73e8;
+            box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #1557b0;
+        }
+
         #result {
             display: none;
         }
-        
+
         .info {
             margin-bottom: 25px;
             background: #f8f9fa;
             padding: 15px;
             border-radius: 6px;
-        }
-        
-        .info p {
-            margin: 8px 0;
-            color: #444;
         }
 
         table {
@@ -37,13 +102,12 @@
             color: #1a73e8;
         }
 
-        .total-score {
-            text-align: right;
-            font-size: 20px;
+        .total {
+            font-size: 24px;
             font-weight: bold;
             color: #1a73e8;
-            padding: 15px;
-            border-top: 2px solid #1a73e8;
+            text-align: right;
+            padding: 20px 0;
         }
 
         .back-btn {
@@ -59,97 +123,109 @@
         .back-btn button:hover {
             background: #444;
         }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 20px auto;
+                padding: 20px;
+            }
+            h1 {
+                font-size: 20px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>中考成绩查询系统</h1>
+        <h1>上海中考成绩查询系统</h1>
         <form id="queryForm">
-            <!-- 保持原有表单内容不变 -->
+            <div class="form-group">
+                <label for="examNumber">准考证号：</label>
+                <input 
+                    type="text" 
+                    id="examNumber"
+                    placeholder="请输入14位准考证号"
+                    required
+                    pattern="\d{14}"
+                    title="请输入正确的14位准考证号"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="idCard">身份证号：</label>
+                <input 
+                    type="text" 
+                    id="idCard"
+                    placeholder="请输入18位身份证号码"
+                    required
+                    pattern="\d{17}[\dXx]"
+                    title="请输入正确的身份证号码"
+                >
+            </div>
+
+            <button type="submit">立即查询</button>
         </form>
     </div>
 
-    <!-- 新增成绩结果显示 -->
     <div id="result" class="container">
-        <h1>中考成绩查询结果</h1>
+        <h1>2023年中考成绩报告</h1>
         <div class="info">
-            <p>准考证号：<span id="resultExamNumber">20231478523694</span></p>
-            <p>考试时间：2023年上海市中考</p>
+            <p>准考证号：20231478523694</p>
+            <p>考生姓名：张某某</p>
         </div>
 
         <table>
             <tr>
-                <th>科目</th>
-                <th>分数</th>
-                <th>满分</th>
+                <th>考试科目</th>
+                <th>考试成绩</th>
             </tr>
             <tr>
                 <td>语文</td>
-                <td>148</td>
-                <td>150</td>
+                <td>140</td>
             </tr>
             <tr>
                 <td>数学</td>
                 <td>147</td>
-                <td>150</td>
             </tr>
             <tr>
                 <td>英语</td>
-                <td>149</td>
-                <td>150</td>
+                <td>145</td>
             </tr>
             <tr>
                 <td>综合测试</td>
-                <td>150</td>
-                <td>150</td>
+                <td>145</td>
             </tr>
             <tr>
                 <td>道德与法治</td>
                 <td>59</td>
-                <td>60</td>
             </tr>
             <tr>
                 <td>历史</td>
-                <td>59</td>
-                <td>60</td>
+                <td>58</td>
             </tr>
             <tr>
                 <td>体育</td>
                 <td>30</td>
-                <td>30</td>
             </tr>
         </table>
-        
-        <div class="total-score">
-            总分：724/750
-        </div>
+
+        <div class="total">总分：724</div>
 
         <div class="back-btn">
-            <button onclick="location.reload()">返回查询</button>
+            <button onclick="location.reload()">重新查询</button>
         </div>
     </div>
 
     <script>
-        // 表单提交处理
         document.getElementById('queryForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // 生成随机14位准考证号
-            const generateExamNumber = () => {
-                const prefix = '2023'; // 年份前缀
-                const randomPart = Math.floor(Math.random() * 10000000000).toString().padStart(10, '0');
-                return prefix + randomPart;
-            };
-
-            // 显示结果页面
             document.querySelector('.container').style.display = 'none';
             document.getElementById('result').style.display = 'block';
-            document.getElementById('resultExamNumber').textContent = generateExamNumber();
         });
 
-        // 身份证验证增强（示例）
-        document.getElementById('idCard').addEventListener('input', function(e) {
-            this.value = this.value.toUpperCase().replace(/[^0-9X]/g, '');
+        // 身份证输入自动格式化
+        document.getElementById('idCard').addEventListener('input', function() {
+            this.value = this.value.toUpperCase().replace(/[^\dX]/g, '');
         });
     </script>
 </body>
